@@ -1,0 +1,2 @@
+**Con este comando hace el archivo en la carpeta dist
+ng build --prod --build-optimizer
