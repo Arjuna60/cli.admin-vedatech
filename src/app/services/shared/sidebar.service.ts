@@ -23,9 +23,17 @@ export class SidebarService {
         { titulo: 'Alta Cuenta', url: '/bank' },
         { titulo: 'Ingresar Deposito', url: '/deposit' },
         { titulo: 'Ingresar Cheque', url: '/check' },
-        { titulo: 'Movimientos', url: '/medicos' }
-
-
+        { titulo: 'Movimientos', url: '/bankTransaction' },
+        { titulo: 'Enviar Factura', url: '/sendinvoice' },
+      ]
+    },
+    {
+      titulo: 'Clientes',
+      icono: 'fa fa-address-book (alias)',
+      submenu: [
+        { titulo: 'Alta de Cliente', url: '/addcustomer' },
+        { titulo: 'Ventas x Cliente', url: '/reportsales' },
+        { titulo: 'Agregar una factura', url: '/addinvoice' },
       ]
     },
     {
@@ -36,7 +44,29 @@ export class SidebarService {
         { titulo: 'Hospitales', url: '/hospitales' },
         { titulo: 'Médicos', url: '/medicos' }
       ]
-    }
+    },
+    {
+      titulo: 'Cuentas',
+      icono: 'mdi mdi-book-multiple',
+      submenu: [
+        { titulo: 'Cuentas', url: '/accounts' },
+        { titulo : 'Agregar Cuenta', url: '/addSubAccount' },
+        { titulo: 'Editar Cuenta', url: '/editAccount' },
+        { titulo: 'Borrar Cuenta', url: '/deleteAccount' }
+      ]
+    },
+    {
+      titulo: 'Catalogos',
+      icono: 'mdi mdi-folder-upload',
+      submenu: [
+        { titulo: 'Envio de Archivos', url: '/catalogs' },
+        { titulo : 'Bancos', url: '/catalog-bank' },
+        { titulo: 'Movimientos Bancarios', url: '/catalog-trans' },
+        { titulo: 'Proveedores', url: '/catalog-supplier' },
+        { titulo: 'Clientes', url: '/catalog-customer' }
+
+      ]
+    },
   ];
 
   constructor() { }

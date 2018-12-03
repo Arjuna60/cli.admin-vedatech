@@ -5,7 +5,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { APP_ROUTES } from './app.routes';
 
 // Modulos
-import { PagesModule } from './pages/pages.module';
+import { PagesModule } from './pages/modules/pages.module';
 
 // temporal
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,13 +22,20 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { AuthRequestOptions } from './auth-request';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AccountigTypeComponent } from './accounting/accountig-type/accountig-type.component';
+import { BankTransactionsComponent } from './pages/bank/bank-transactions/bank-transactions.component';
+import { AccountingComponent } from './pages/accounting/accounting.component';
+import { CatalogsComponent } from './pages/catalogs/catalogs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
-
+    RegisterComponent,
+    AccountigTypeComponent,
+    BankTransactionsComponent,
+    AccountingComponent,
+    CatalogsComponent,
   ],
   imports: [
     BrowserModule,

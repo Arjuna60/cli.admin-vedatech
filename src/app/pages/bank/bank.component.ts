@@ -4,7 +4,7 @@ import { BankService } from '../../services/bank/bank.service';
 import swal from 'sweetalert';
 import { Bank } from '../../models/bank.model';
 import { AccountService } from '../../services/service.index';
-import { AccountingType } from '../../models/account.model';
+import { AccountingType, SubAccount } from '../../models/account.model';
 import { Observable } from 'rxjs';
 import { startWith, map, filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -28,7 +28,8 @@ export class BankComponent implements OnInit {
 
    bankAccount = {
       'id': null,
-      'accountingType': {},
+     // 'accountingType': {},
+     'subAccount': {},
      'nameBank': '',
      'accountNumber': '',
      'address': '',
@@ -39,8 +40,8 @@ export class BankComponent implements OnInit {
    };
 
 
-   accounts: AccountingType[];
-   filteredAccOptions: Observable<AccountingType[]>;
+   accounts: SubAccount[];
+   filteredAccOptions: Observable<SubAccount[]>;
 
 
 
@@ -49,7 +50,7 @@ export class BankComponent implements OnInit {
                private accountService: AccountService,
                private injector: Injector) {
     this.createForm();
-    this.accountService.getAllAccounts().subscribe(
+    this.accountService.getAllSubAccounts().subscribe(
       res => this.accounts = res
     );
 
@@ -62,7 +63,7 @@ export class BankComponent implements OnInit {
    createForm() {
      this.form = new FormGroup({
        'id': new FormControl(),
-       'accountingType': new FormControl('', [Validators.required]),
+       'subAccount': new FormControl('', [Validators.required]),
        'nameBank': new FormControl('', [Validators.required, Validators.minLength(4)]),
        'accountNumber': new FormControl('', [Validators.required, Validators.minLength(5), Validators.pattern('[0-9]+')]),
        'email': new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
@@ -109,19 +110,17 @@ export class BankComponent implements OnInit {
 
 
         create(data) {
-
           this.bankService.create(data).subscribe( res => {
             console.log('Valor recibido', res);
              swal('Mensaje del Servidor...', `La cuenta de ${res.nameBank}: ${res.accountNumber} se guardo con exito`, 'success');
              this.form.setValue(this.bankAccount);
              this.getAllBankAccounts();
-          },
-         error => {
-           console.log(error, '  / ', error.error);
-           swal('Mensaje del Servidor:', `Error!!...El numero de la cuenta: ${data.accountNumber} ya existe `, 'error');
-
-         }
-      );
+              },
+                 error => {
+                   console.log(error, '  / ', error.error);
+                   swal('Mensaje del Servidor:', `Error!!...El numero de la cuenta: ${data.accountNumber} ya existe `, 'error');
+                 }
+            );
         }
 
         updateBank(data) {
@@ -132,7 +131,7 @@ export class BankComponent implements OnInit {
              swal('Mensaje del Servidor...', `La cuenta de ${res.nameBank}: ${res.accountNumber} se actualizo con exito`, 'success');
              this.bankAccount = {
               'id': null,
-              'accountingType': {},
+              'subAccount': {},
              'nameBank': '',
              'accountNumber': '',
              'address': '',
@@ -154,21 +153,16 @@ export class BankComponent implements OnInit {
         }
 
         getAllBankAccounts() {
-
           this.bankService.getAllAccounts()
           .subscribe(bankaccounts => {
-
             // tslint:disable-next-line:semicolon
              this.bankaccounts = bankaccounts
              if (this.bankaccounts != null) {
                 this.calcTotal();
              }
             }
-
-
           );
-
-          }
+        }
 
         calcTotal() {
         this.total = 0.00;
@@ -200,7 +194,7 @@ export class BankComponent implements OnInit {
 
         loadAccount() {
 
-          this.accountService.getAllAccounts().subscribe(
+          this.accountService.getAllSubAccounts().subscribe(
                 res => this.accounts = res
               );
                   console.log('Accounts ', this.accounts);
@@ -209,22 +203,22 @@ export class BankComponent implements OnInit {
 
             filterAcc() {
 
-              this.filteredAccOptions = this.form.get('accountingType').valueChanges
+              this.filteredAccOptions = this.form.get('subAccount').valueChanges
               .pipe(
-              startWith<string | AccountingType>(''),
+              startWith<string | SubAccount>(''),
               map(value =>  typeof value === 'string' ? value : value.nameAccount),
               map(name => name ? this._filterAcc(name) : this.accounts.slice())
               );
 
             }
 
-            private _filterAcc(name: string): AccountingType[] {
+            private _filterAcc(name: String): SubAccount[] {
               const filterAccValue = name.toLowerCase();
               return this.accounts.filter(option => option.nameAccount.toLowerCase().indexOf(filterAccValue) === 0);
             }
 
 
-            displayAccFn(acc?: AccountingType): string | undefined {
+            displayAccFn(acc?: SubAccount): String | undefined {
               return acc ? acc.nameAccount : undefined;
             }
 
@@ -232,7 +226,8 @@ export class BankComponent implements OnInit {
 
               this.bankAccount = {
                 'id': null,
-                'accountingType': {},
+          //      'accountingType': {},
+               'subAccount': {},
                'nameBank': '',
                'accountNumber': '',
                'address': '',

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 const AUTH_HEADER_KEY = 'Authorization';
 const AUTH_PREFIX = 'Bearer';
 
+// quitamos esto en setHeader para mandar individual 'Content-Type': 'application/json',
 @Injectable()
 export class AuthRequestOptions implements HttpInterceptor  {
 
@@ -13,10 +14,10 @@ export class AuthRequestOptions implements HttpInterceptor  {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
         request = request.clone({
-            setHeaders: { 'Content-Type': 'application/json',
-                Authorization: `Bearer ${currentUser.token}`
+            setHeaders: { Authorization: `Bearer ${currentUser.token}`
             }
         });
+        
     }
 
     return next.handle(request);

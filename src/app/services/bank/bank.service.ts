@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Bank, BankTransaction } from '../../models/bank.model';
@@ -44,16 +44,14 @@ export class BankService {
   }
 
   getAllAccounts(): Observable<Bank[]> {
-    this.token = localStorage.getItem('token');
-   console.log('TOKEN EN GETALLACCOUNTS ', this.token);
-
-
-  this.httpHeaders = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token});
-    // url += '?token=' + this.token;
-    return this.http.get<Bank[]>(this.urlEndPoint + '/api/bank/getAllBankAccounts/', {headers: this.httpHeaders})
-    .pipe(
-      map(response => response as Bank[]),
-      map(err =>  err) );
+      this.token = localStorage.getItem('token');
+      console.log('TOKEN EN GETALLACCOUNTS ', this.token);
+      this.httpHeaders = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.token});
+     // url += '?token=' + this.token;
+     return this.http.get<Bank[]>(this.urlEndPoint + '/api/bank/getAllBankAccounts/', {headers: this.httpHeaders})
+        .pipe(
+         map(response => response as Bank[]),
+         map(err =>  err) );
   }
 
   updateBankAccount(data: Bank): Observable<Bank> {
@@ -74,5 +72,45 @@ export class BankService {
          '/api/bank/add-bank-transaction/', bankTransaction, {headers: this.httpHeaders});
     }
 
+    sendXmlInvoice(fileXml: File): Observable<any> {
+      const url = URL_SERVICIOS + '/api/customer/sendXmlFile/';
+    this.httpHeaders = new HttpHeaders({'Content-Type': 'application/xml', 'Authorization': 'Bearer ' + this.token});
+      // url += '?token=' + this.token;
+      return this.http.post<any>(this.urlEndPoint +
+         '/api/customer/send-xml-file', fileXml, {headers: this.httpHeaders});
+    }
 
+    // text/plain
+    sendTxtFile(fileTxt: File): Observable<any> {
+      const url = URL_SERVICIOS + '/api/bank/sendXmlFile/';
+      const formdata: FormData = new FormData();
+      formdata.append('file', fileTxt);
+
+    this.httpHeaders = new HttpHeaders({'Content-Type': undefined, 'Authorization': 'Bearer ' + this.token});
+      // url += '?token=' + this.token;
+    //  return this.http.post<any>(this.urlEndPoint +
+      //   '/api/bank/send-txt-file', fileTxt, {headers: this.httpHeaders});
+
+         return this.http.post(this.urlEndPoint +
+          '/api/bank/send-txt-file', formdata,{headers: this.httpHeaders});
+    }
+
+    // Otra opcion para mandar file
+    pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
+      const formdata: FormData = new FormData();
+   
+      formdata.append('file', file);
+   
+      const req = new HttpRequest('POST', 'http://localhost:8080/api/upload/supplier-file', formdata,  {
+        headers: this.httpHeaders,
+        reportProgress: true,
+        responseType: 'text'
+      });
+  
+      return this.http.request(req);
+    }
+   
+    getFiles(): Observable<any> {
+      return this.http.get('/getallfiles');
+    }
 }

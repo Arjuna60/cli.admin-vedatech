@@ -1,0 +1,60 @@
+<div class="card-body">
+    <form [formGroup]="form" novalidate="novalidate">
+        <div class="form-body">
+            <div class="row">
+                <div class=col-md-6>
+                    <h3 class="card-title">Cuentas</h3>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                        <input type="text" (click)="loadAccount()" class="font-size" placeholder="Cuenta" (focus)="filterAcc()" size="60px" aria-label="Assignee" matInput formControlName="accountType" [matAutocomplete]="auto" required>
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayAccFn">
+                            <mat-option *ngFor="let acc of filteredAccOptions | async" [value]="acc">
+                                {{ acc.name }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row p-t-20">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <!-- <label for="nombre">ID</label> -->
+                        <input type="text" readonly="readonly" formControlName="id" name="nameBank" class="form-control input-sm" id="id" placeholder="Id Banco">
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Nombre de la Cuenta Name</label>
+                        <input type="text" id="firstName" formControlName="nameAccount" class="form-control" placeholder="Nombre de la Cuenta">
+                        <small class="form-control-feedback"> This is inline help </small> </div>
+                </div>
+                <!--/span-->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Numero de la Cuenta Name</label>
+                        <input type="text" id="lastName" formControlName="accountNumber" class="form-control" placeholder="000-000-000-000">
+                        <small class="form-control-feedback"> This field has error. </small> </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Balance</label>
+                        <input type="number" id="lastName" formControlName="balance" class="form-control" placeholder="$ 000,000.00">
+                        <small class="form-control-feedback"> This field has error. </small> </div>
+                </div>
+                <!--/span-->
+            </div>
+            <!--/row-->
+
+            <!--/span-->
+
+            <div class="form-actions">
+                <button type="submit" (click)="save()" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                <button type="button" class="btn btn-inverse">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

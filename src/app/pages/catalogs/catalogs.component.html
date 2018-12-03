@@ -1,0 +1,88 @@
+<div class="card">
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card-body">
+                <h4 class="card-title">Catalogo de Cuentas Auxiliares</h4>
+                <p class="card-text">
+                    Seleccione el archivo en formato CVS que contenga el catalogo de las cuentas de Banco<br>
+                    <small>El archivo debe contener el nombre del Banco, el nuemero de la cuenta y el saldo inicial</small>
+                </p>
+                <label class="custom-file d-block">
+          <input (change)="onAccountTypeFileSelected($event)" type="file" id="file" class="custom-file-input">
+          <span class="custom-file-control">{{fileName1}}</span>
+        </label>
+                <br>
+                <button class="btn btn-info" (click)="onUploadAccountingTypeFile()">Enviar Archivo</button>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <div [ngClass]="infoColor">
+                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button> -->
+                    <h3 [ngClass]="textColor"><i class="fa fa-check-circle"></i> Success</h3> This is an example top alert. You can edit what u wish. Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see
+                    how spacing within an alert works with this kind of content.
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-body">
+                    <h4 class="card-title">Progreso de envio</h4>
+                    <div *ngIf="currentFileUpload" class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress1.percentage1}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress1.percentage1+'%'}">
+                            {{progress1.percentage1}}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Envio de Archivos de Movimientos Bancarios -->
+
+<div class="card">
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="card-body">
+                <h4 class="card-title">Catalogo de Cuentas Auxiliares</h4>
+                <p class="card-text">
+                    Seleccione el archivo en formato CVS que contenga el catalogo de las cuentas de Banco<br>
+                    <small>El archivo debe contener el nombre del Banco, el nuemero de la cuenta y el saldo inicial</small>
+                </p>
+                <label class="custom-file d-block">
+          <input (change)="onBankTransFileSelected($event)" type="file" id="file" class="custom-file-input">
+          <span class="custom-file-control">{{fileName2}}</span>
+        </label>
+                <br>
+                <button class="btn btn-dark" (click)="onUploadBankTransactionFile()">Enviar Archivo</button>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <div class="alert alert-success">
+                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button> -->
+                    <h3 class="text-success"><i class="fa fa-check-circle"></i> Success</h3> This is an example top alert. You can edit what u wish. Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see
+                    how spacing within an alert works with this kind of content.
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-body">
+                    <h4 class="card-title">Progreso de envio</h4>
+                    <div class="progress">
+
+                        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress2.percentage2}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress2.percentage2+'%'}">
+                            {{progress2.percentage2}}%
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

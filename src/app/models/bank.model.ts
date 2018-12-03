@@ -2,7 +2,8 @@
 export class Bank {
 
     public id: number;
-    public accountingType: {};
+  //  public accountingType: {};
+    public subAccount: {};
     public nameBank: string;
     public accountNumber: string;
     public address: string;
@@ -42,6 +43,22 @@ export class BankTransaction {
     ];
     public suppliers: {};
 
+
+}
+
+export class BankTransactionsTwo {
+
+    public fechaOperacion: Date;
+    public fecha: Date;
+    public referencia: String;
+    public descrip: String;
+    public codigoTrans: String;
+    public sucursal: String;
+    public deposito: number;
+    public retiro: number;
+    public saldo: number;
+    public movimiento: String;
+    public descripcionDetalle: String;
 
 }
 

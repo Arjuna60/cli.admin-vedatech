@@ -1,0 +1,73 @@
+<div class="col-md-12">
+    <div class="row">
+        <table class="table color-table inverse-table table-striped table-sm table-hover">
+            <thead class="thead-inverse">
+                <tr>
+                    <!-- <th scope="col ">#</th> -->
+                    <th scope="col ">Fecha de Operacion</th>
+                    <th style="width:8%" scope="col ">Fecha de Cobro</th>
+                    <th scope="col ">Referencia</th>
+                    <!-- <th scope="col ">Desc</th> -->
+                    <!-- <th scope="col ">Codigo Trans</th> -->
+                    <!-- <th scope="col ">Sucursal</th> -->
+                    <th scope="col ">Deposito</th>
+                    <th scope="col ">Retiros</th>
+                    <th scope="col ">Saldos</th>
+                    <th scope="col ">Movimientos</th>
+                    <th scope="col ">Descripcion Gen</th>
+                    <th>Edit</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bank of bankTransaction">
+                    <!-- <th scope="row ">{{bankTransaction.id}}</th> -->
+                    <td><small>{{bank.fechaOperacion}}</small></td>
+                    <td><small>{{bank.fecha}}</small></td>
+                    <td><small>{{bank.referencia}}</small></td>
+                    <!-- <td>{{bank.descrip}}</td> -->
+                    <!-- <td>{{bank.codigoTrans}}</td> -->
+                    <!-- <td>{{bank.sucursal}}</td> -->
+                    <!-- <td>{{bank.referencia}}</td> -->
+                    <td><small>{{bank.deposito | currency}}</small></td>
+                    <td><small>{{bank.retiro | currency}}</small></td>
+                    <td><small>{{bank.saldo | currency}}</small></td>
+                    <td><small>{{bank.movimiento}}</small></td>
+                    <td><small>{{bank.descripcionDetalle}}</small></td>
+
+                    <td class="text-nowrap">
+                        <a (click)="select(bank.id)" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-5"></i> </a>
+                        <!-- <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a> -->
+                    </td>
+
+                </tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+
+
+                <td>
+
+                </td>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex no-block">
+                        <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income"></div>
+                        <div class="align-self-center">
+                            <h6 class="text-muted m-t-10 m-b-0">Total Expense</h6>
+                            <h2 class="m-t-0">{{total | currency}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

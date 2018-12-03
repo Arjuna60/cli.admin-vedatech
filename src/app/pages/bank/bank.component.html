@@ -63,7 +63,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <mat-form-field class="example-full-width">
-                                    <input type="text" (click)="loadAccount()" class="font-size" placeholder="Cuenta" (focus)="filterAcc()" size="60px" aria-label="Assignee" matInput formControlName="accountingType" [matAutocomplete]="auto" required>
+                                    <input type="text" (click)="loadAccount()" class="font-size" placeholder="Cuenta" (focus)="filterAcc()" size="60px" aria-label="Assignee" matInput formControlName="subAccount" [matAutocomplete]="auto" required>
                                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayAccFn">
                                         <mat-option *ngFor="let acc of filteredAccOptions | async" [value]="acc">
                                             {{ acc.nameAccount }}
@@ -154,6 +154,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Tabla de Cuentas Bancarias -->
+
         <div class="col-md-6">
             <div class="row">
                 <table class="table color-table inverse-table table-striped table-sm table-hover">

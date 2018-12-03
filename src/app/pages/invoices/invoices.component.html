@@ -1,0 +1,17 @@
+<h3>File Upload Invoice XML</h3>
+
+<input type="file" (change)="onFileSelected($event)" />
+<button (click)="onUploadFile()" class="btn btn-info">Upload XML File</button>
+
+<button (click)="onUploadTxtFile()" class="btn btn-info">Upload Text File</button>
+
+<hr/>
+<div class="row">
+    <div class="card-body">
+        <h4 class="card-title">Progreso de envio</h4>
+        <div *ngIf="currentFileUpload" class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                {{progress.percentage}}%</div>
+        </div>
+    </div>
+</div>
